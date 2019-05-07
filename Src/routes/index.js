@@ -1,7 +1,6 @@
 const router = require('koa-router')()
-const monk = require("monk");
-const url = '127.0.0.1:27017/userinfo';
-const db = monk(url);
+
+const mongo= require('../util/db')
 
 router.get('/', async (ctx, next) => {
   await ctx.render('index', {
@@ -19,9 +18,10 @@ router.get('/json', async (ctx, next) => {
   }
 })
 
-const user = db.get('userinfo');
+const user = mongo.db.get('userinfo');
 router.get(`/test`, async (ctx) => {
-    let st = await user.find();
+    // let st =  await user.find({"Name":"张三"});
+    let st =  await user.find();
     ctx.response.type = `application/json`;
     console.log(st)
     ctx.body = st;
