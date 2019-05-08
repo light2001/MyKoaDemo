@@ -20,11 +20,11 @@ router.post('/Update', async (ctx, next) => {
      //根据参数查询
      let obj =new Object
      obj.Name=postParam.Name
-     console.log(obj)
-     let old= await user.find(obj)
+     let old= await user.findOne(obj)
      console.log(old)
      let newData= old
      newData.Sex=postParam.Sex
+     console.log(newData)
      let st =  await user.update(old,newData);
      ctx.response.type = `application/json`;
      console.log(st)
