@@ -15,30 +15,54 @@ router.get('/bar', function (ctx, next) {
 })
 
 router.post('/Update', async (ctx, next) => {
-  ctx.body = {
-    title: 'koa2 json11'
-  }
+     //获取参数见
+     let postParam = ctx.request.body
+     //根据参数查询
+     let obj =new Object
+     obj.Name=postParam.Name
+     console.log(obj)
+     let old= await user.find(obj)
+     console.log(old)
+     let newData= old
+     newData.Sex=postParam.Sex
+     let st =  await user.update(old,newData);
+     ctx.response.type = `application/json`;
+     console.log(st)
+     ctx.body = st;
 })
 
 router.post('/Add', async (ctx, next) => {
-  ctx.body = {
-    title: 'koa2 json11'
-  }
+   //获取参数见
+   let postParam = ctx.request.body
+   //根据参数查询
+   let st =  await user.insert(postParam);
+   ctx.response.type = `application/json`;
+   // console.log(st)
+   ctx.body = st;
 })
 
 
 router.post('/Delete', async (ctx, next) => {
-  ctx.body = {
-    title: 'koa2 json11'
-  }
+    //获取参数见
+    let postParam = ctx.request.body
+    //根据参数查询
+    let st =  await user.remove(postParam);
+    ctx.response.type = `application/json`;
+    // console.log(st)
+    ctx.body = st;
 })
 
 
 
-router.get('/Get', async (ctx, next) => {
-  ctx.body = {
-    title: 'koa2 json11'
-  }
+router.post('/Get', async (ctx, next) => {
+  //获取参数见
+  let postParam = ctx.request.body
+  console.log(postParam)
+  //根据参数查询
+  let st =  await user.find(postParam);
+  ctx.response.type = `application/json`;
+  // console.log(st)
+  ctx.body = st;
 })
 
 
