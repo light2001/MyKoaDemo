@@ -31,6 +31,18 @@ router.post('/Update', async (ctx, next) => {
      ctx.body = st;
 })
 
+
+router.post('/UpdateById', async (ctx, next) => {
+  //获取参数见
+  let postParam = ctx.request.body
+  //根据参数查询
+  console.log(postParam)
+  let st =  await user.updateById(postParam._id,postParam);
+  ctx.response.type = `application/json`;
+  console.log(st)
+  ctx.body = st;
+})
+
 router.post('/Add', async (ctx, next) => {
    //获取参数见
    let postParam = ctx.request.body
